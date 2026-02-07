@@ -1,8 +1,8 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
-  /* ================= BACKGROUND COLORS FIRST ================= */
+  /* ========== PASTEL COLORS (TOP — NO TDZ) ========== */
 
-  const pastelColors = [
+  var pastelColors = [
     "#ffe4ec", // pink
     "#e8f5e9", // green
     "#e3f2fd", // blue
@@ -11,31 +11,32 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   function changeBackground() {
-    const random = pastelColors[Math.floor(Math.random() * pastelColors.length)];
+    var random =
+      pastelColors[Math.floor(Math.random() * pastelColors.length)];
     document.body.style.backgroundColor = random;
   }
 
-  /* ================= INTRO PAGES ================= */
+  /* ========== INTRO PAGES ========== */
 
-  const introPages = [
+  var introPages = [
     "Hey 👀",
     "I have something important to ask you 💭",
     "But before that…",
     "I hope this makes you smile 😊"
   ];
 
-  let pageIndex = 0;
-  let isTyping = false;
+  var pageIndex = 0;
+  var isTyping = false;
 
-  const textEl = document.getElementById("text");
-  const nextBtn = document.getElementById("nextBtn");
+  var textEl = document.getElementById("text");
+  var nextBtn = document.getElementById("nextBtn");
 
   function typeText(text) {
     isTyping = true;
     textEl.textContent = "";
-    let i = 0;
+    var i = 0;
 
-    const interval = setInterval(() => {
+    var interval = setInterval(function () {
       textEl.textContent += text.charAt(i);
       i++;
       if (i >= text.length) {
@@ -49,12 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
     typeText(introPages[pageIndex]);
   }
 
-  /* LOAD FIRST PAGE */
+  // FIRST LOAD
   loadPage();
   changeBackground();
 
-  /* NEXT BUTTON */
-  nextBtn.addEventListener("click", () => {
+  nextBtn.addEventListener("click", function () {
     if (isTyping) return;
 
     pageIndex++;
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ================= FINAL PAGE ================= */
+  /* ========== FINAL PAGE ========== */
 
   function showValentinePage() {
     document.getElementById("introContainer").classList.add("hidden");
@@ -75,16 +75,16 @@ document.addEventListener("DOMContentLoaded", () => {
     changeBackground();
   }
 
-  /* ================= YES / NO BUTTONS ================= */
+  /* ========== YES / NO LOGIC ========== */
 
-  const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
-  const message = document.getElementById("message");
+  var yesBtn = document.getElementById("yesBtn");
+  var noBtn = document.getElementById("noBtn");
+  var message = document.getElementById("message");
 
-  let yesSize = 18;
-  let noSize = 18;
+  var yesSize = 18;
+  var noSize = 18;
 
-  const cuteMessages = [
+  var cuteMessages = [
     "Are you sure? 🥺",
     "Think again 💭",
     "I’ll wait 💕",
@@ -92,35 +92,40 @@ document.addEventListener("DOMContentLoaded", () => {
     "Okay last chance 😭"
   ];
 
-  noBtn.addEventListener("click", () => {
+  noBtn.addEventListener("click", function () {
     yesSize += 6;
     noSize = Math.max(8, noSize - 2);
 
     yesBtn.style.fontSize = yesSize + "px";
     noBtn.style.fontSize = noSize + "px";
 
-    message.textContent = cuteMessages[Math.floor(Math.random() * cuteMessages.length)];
+    message.textContent =
+      cuteMessages[Math.floor(Math.random() * cuteMessages.length)];
   });
 
-  yesBtn.addEventListener("click", () => {
-    message.textContent = "YAYYY!!! 💖🥹 You just made me the happiest!";
+  yesBtn.addEventListener("click", function () {
+    message.textContent =
+      "YAYYY!!! 💖🥹 You just made me the happiest!";
   });
 
-  /* ================= FLOATING HEARTS ================= */
+  /* ========== FLOATING HEARTS ========== */
 
-  const heartsContainer = document.getElementById("hearts-container");
+  var heartsContainer = document.getElementById("hearts-container");
 
   function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
+    var heart = document.createElement("div");
+    heart.className = "heart";
     heart.innerText = "💓";
 
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+    heart.style.animationDuration =
+      4 + Math.random() * 3 + "s";
 
     heartsContainer.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 7000);
+    setTimeout(function () {
+      heart.remove();
+    }, 7000);
   }
 
   setInterval(createHeart, 400);
